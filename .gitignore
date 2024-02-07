@@ -5,10 +5,10 @@ KRAKEN2_RESULTS/test_data/*
 slurm/log/*
 slurm/clusterSnakemake.sh
 slurm/config.yaml
-list/*
-log/*
+list/*.csv
+log/*.log
 logs/*
-refs/*
+refs/*fasta
 .snakemake/*
 *.fastq*
 *.fq*
