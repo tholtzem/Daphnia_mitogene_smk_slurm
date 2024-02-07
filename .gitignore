@@ -1,7 +1,7 @@
 Concatenated_exonerate_input_*
 KRAKEN2_RESULTS/concat/*
 slurm/log/*
-slurm/clusterSnakemake.pbs
+slurm/clusterSnakemake.sh
 slurm/config.yaml
 list/*
 log/*
