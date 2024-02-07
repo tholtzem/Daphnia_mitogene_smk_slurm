@@ -1,5 +1,7 @@
 Concatenated_exonerate_input_*
-KRAKEN2_RESULTS/concat/*
+KRAKEN2_RESULTS/concat/*.fq
+KRAKEN2_RESULTS/concat/*.fastq
+KRAKEN2_RESULTS/test_data/*
 slurm/log/*
 slurm/clusterSnakemake.sh
 slurm/config.yaml
@@ -24,7 +26,7 @@ refs/*
 *.done
 *.log
 list/*
-mitogenes/*/*.fas
-mitogenes/*/*.txt
-mitogenes/*/*align*
+*.fas
+*.txt
+*align*
 
