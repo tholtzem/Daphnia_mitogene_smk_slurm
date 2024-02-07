@@ -4,12 +4,11 @@
 
 ======================================================
 
+
 ## Information on the tutorial
 
 This workflow is designated for the use of [MitoGeneExtractor](https://github.com/cmayer/MitoGeneExtractor/tree/last-reviews-before-publication) to extract mitochondrial protein-coding genes from sequencing libraries.
 
-
-======================================================
 
 ## Input
 
@@ -19,6 +18,8 @@ We created separate files for each gene sequence (see refs/)
 
 2) whole genome sequencing data in the form of trimmed (bbduk) and decontaminated (KRAKEN2) fastq reads. For more information on the pre-processing process see  the [Daphnia_Resakemake_pbs_2.0 Tutorial](https://github.com/tholtzem/Daphnia_RestEggs_snakemake_pbs_2.0/tree/master).
 
+
+======================================================
 
 
 ## Anaconda and Mamba
@@ -52,6 +53,7 @@ mamba env update --name da_mitogenextractor --file env/daphnia_mitogene.yaml
 
 ## Get the snakemake pipeline for the slurm based cluster (here leo5)
 
+
 ```
 mkdir some_directory
 cd some_directory
@@ -61,6 +63,7 @@ rsync -avP /scratch/c7701178/snakemake/ ./
 
 
 ## Some information on the snakemake pipeline for the slurm based cluster (here leo5)
+
 
 1. Testing and execution of snakemake in working directory (where your snakefile is located)
 
@@ -82,7 +85,7 @@ rsync -avP /scratch/c7701178/snakemake/ ./
 
 6. Sample information and metadata are in list/samples.csv
 
-7. Data was downloaded from https://github.com/snakemake/snakemake-tutorial-data/archive/v5.4.5.tar.gz **NOT required for c770 group!**
+7. Data was downloaded from (https://github.com/snakemake/snakemake-tutorial-data/archive/v5.4.5.tar.gz) **NOT required for c770 group!**
 
 ## Local execution of snakemake (for testing only, else not recommended!)
 
