@@ -1,0 +1,12 @@
+name: da_mitogenextractor
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - mamba
+  - python
+  - ipython
+  - snakemake-minimal
+  - numpy
+  - pandas

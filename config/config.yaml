@@ -1,0 +1,26 @@
+# Files
+
+## For trimming using bbduk 
+#adapters: "adapters.fa"
+#phiX: "phix174_ill.ref.fa.gz"
+
+## Kraken2 database
+#KRAKEN2_DB: "EXCHANGE/K2DB_DAPH/"
+
+prot_ref_Dgal: "refs/D_galeata_linear.fasta"
+#prot_ref_test: "refs/D_galeata_linear_nad4.fasta"
+
+genes:
+        - cox1
+        - cox2
+        - cox3
+        - cob2
+        - nad1
+        - nad2
+        - nad3
+        - nad4
+        - nad4l
+        - nad5
+        - nad6
+        - atp6
+        - atp8
