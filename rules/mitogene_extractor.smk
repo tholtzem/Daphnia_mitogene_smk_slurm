@@ -1,5 +1,7 @@
-rule fastq_concati:
+rule fastq_concat:
   input:
+    #r1 = "/scratch/c7701125/mach2/EXCHANGE/CLONE_DATA/merged_fastq/{sample}_R_1_merged.fastq.gz",
+    #r2 = "/scratch/c7701125/mach2/EXCHANGE/CLONE_DATA/merged_fastq/{sample}_R_2_merged.fastq.gz"
     r1 = "/scratch/c7701178/mach2/DAPHNIA/Daphnia_RestEggs_snakemake_pbs_2.0_HiC/KRAKEN2_RESULTS/{sample}_R1.trmdfilt.keep.fq.gz",
     r2 = "/scratch/c7701178/mach2/DAPHNIA/Daphnia_RestEggs_snakemake_pbs_2.0_HiC/KRAKEN2_RESULTS/{sample}_R2.trmdfilt.keep.fq.gz"
     #r1 = "/scratch/c7701178/mach2/DAPHNIA/Daphnia_RestEggs_4lakes_smk_slurm/KRAKEN2_RESULTS/{sample}_R1.trmdfilt.keep.fq.gz",
@@ -8,7 +10,7 @@ rule fastq_concati:
     temp("KRAKEN2_RESULTS/concat/{sample}.trmdfilt.keep.concat.fq")
   threads: 1
   message: """ fqgz 2 fq, remove white space in read names """
-  resources: mem_mb=150, walltime="00:15:00"
+  resources: mem_mb=150, walltime="01:00:00"
   shell:
     """
     zcat {input.r1} {input.r2} | sed 's, ,_,g' > {output}
@@ -26,7 +28,8 @@ rule MitoGeneExtractor:
   log: "log/{gene}/{sample}_Mitogene_extractor.log"
   threads: 1
   message: " MGE "
-  resources: mem_mb=400000, walltime="48:00:00"
+  resources: mem_mb=150000, walltime="07:00:00"
+  #resources: partition="mem2000", mem_mb=100000, walltime="06:00:00"
   shell:
     """
     module load singularity/3.8.7-python-3.10.8-gcc-8.5.0-e6f6onc
