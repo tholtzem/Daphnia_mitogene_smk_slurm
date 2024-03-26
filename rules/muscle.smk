@@ -17,7 +17,7 @@ rule multifas:
   output:
     "mitogenes/{sets}/{gene}_multi.fas"
   threads: 1
-  message: """ fqgz 2 fq, remove white space in read names """
+  message: """ Create a multi fasta file for each gene """
   shell:
     """ 
     cat mitogenes/{wildcards.sets}/{wildcards.gene}/*_consensus_Daphnia_galeata_{wildcards.gene}.renamed.fas > {output}
@@ -50,5 +50,5 @@ rule muscle_align:
   resources: mem_mb=10000, walltime="02:00:00"
   shell:
     """
-    muscle -align {input} -output {output} 2> {log}
+    muscle -align {input} -output {output} -log {log} -verbose
     """

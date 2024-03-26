@@ -7,16 +7,42 @@
 
 ## Information on the tutorial
 
-This workflow is designated for the use of [MitoGeneExtractor](https://github.com/cmayer/MitoGeneExtractor/tree/last-reviews-before-publication) to extract mitochondrial protein-coding genes from sequencing libraries.
+This workflow is designated for the extraction and analysis of mitochondrial protein-coding genes from sequencing libraries.
 
+The first part entails the use of [MitoGeneExtractor](https://github.com/cmayer/MitoGeneExtractor/tree/last-reviews-before-publication) to extract mitochondrial protein-coding genes from sequencing libraries, and the alignment of those genes with [MUSCLE v5](https://github.com/rcedgar/muscle?tab=readme-ov-file).
 
-## Input
+Input files:
 
 1) amino acid reference in fasta file format:
 Here, we used the protein sequences of the *Daphnia* *galeata* mitochondrial genome, downloaded from [GeneBank](https://www.ncbi.nlm.nih.gov/nuccore/OM397534.1?report=genbank).
 We created separate files for each gene sequence (see refs/)  
 
 2) whole genome sequencing data in the form of trimmed (bbduk) and decontaminated (KRAKEN2) fastq reads. For more information on the pre-processing process see  the [Daphnia_Resakemake_pbs_2.0 Tutorial](https://github.com/tholtzem/Daphnia_RestEggs_snakemake_pbs_2.0/tree/master).
+
+
+### Part 1: rules executed on the cluster using snakemake
+* Use merge_multilanes_fastq.smk to merge fastq files in case your samples have been sequenced on multiple lanes prior to the extraction of mtgenes.
+* Use mitogene_extractor.smk to concatenate cleaned and trimmed paired-end reads, and to extract PCG mtgenes using MitoGeneExtractor.
+* Use rename_consensus_header.smk to rename the header of the consensus sequence according to the sequence name.
+* Use muscle.smk to create alignments for a desired set of samples.
+* Use fas2nex.smk to transform the alignment into nexus format.
+
+### Part 2: steps executed on a local device
+* Open SequenceMatrix and create a matrix in nexus format of your mtgene alignments
+
+Download and install
+
+```
+git clone https://github.com/gaurav/taxondna/releases/download/v1.9/SequenceMatrix-1.9.zip ~/bio/
+unzip SequenceMatrix-1.9.zip
+```
+Open GUI with
+```
+java -jar ~/bio/SequenceMatrix-1.9/SequenceMatrix.jar
+
+```
+
+* Create a partition file (DNA.par) manually
 
 
 ======================================================
@@ -133,3 +159,5 @@ expand("mitogenes/{gene}/{sample}_consensus_Daphnia_galeata_{gene}.fas", sample=
 rule fastq_concat: 100-150 **MB**, walltime < 15 min, rule creates temporary files which will be removed after the job from rule MitogeneExtractor has finished
 
 rule MitogeneExtractor: 100-200 **GB**, walltime < 12 hours (usually < 6 h, but it can also take up to 2 days for very large files)
+
+
