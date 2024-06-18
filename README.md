@@ -61,29 +61,27 @@ module load Anaconda3/2023.10/miniconda-base-2023.10
 # To use conda commands in your current shell session, first do:
 eval "$(/$UIBK_CONDA_DIR/bin/conda shell.bash hook)"
 
-# !!! NOT required for c770 group !!! 
+# Users of the c770 group can simply activate the environment on leo5 with:
+conda activate da_mitogenextractor
+
+# !!! In case you want to change the environment or create your own !!! 
 ## Create environment from yaml file (in envs/):
 mamba env create -f env/daphnia_mitogene.yaml -p $SCRATCH/envs/daphnia_mitogenextractor
 #conda config --append envs_dirs $SCRATCH/envs
 
-# Users of the c770 group can simply activate the environment on leo5 with:
-conda activate da_mitogenextractor
-
 
 # Software can be installed/updated by modifying the env/ file.
-
-# To use the modified conda environment, update with:
+## To use the modified conda environment, update with:
 mamba env update --name da_mitogenextractor --file env/daphnia_mitogene.yaml
 
 ```
 
-## Get the snakemake pipeline for the slurm based cluster (here leo5)
-
+## Users of the c770 group can get the snakemake pipeline for the slurm based cluster (here leo5)
 
 ```
 mkdir some_directory
 cd some_directory
-rsync -avP /scratch/c7701178/snakemake/ ./
+rsync -avP /scratch/c77011XX/snakemake/ ./
 
 ```
 
@@ -136,10 +134,23 @@ sbatch slurm/clusterSnakemake.sh
 ```
 # check all jobs
 sq
+
 # check your jobs only
 squ
+
 # cancel job
-scancel <jobid>
+scancel <JOBID>
+
+# check usage of running job
+## ssh to node (NODELIST)
+ssh <NODELIST>
+## on the compute node
+top
+
+# check usage after the job has completed
+export SACCT_FORMAT="JobID%20,JobName,User,Partition,NodeList,Elapsed,State,ExitCode,MaxRSS,AllocTRES%32"
+sacct -j <JOBID>
+
 ```
 
 
